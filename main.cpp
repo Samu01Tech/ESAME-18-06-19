@@ -61,6 +61,7 @@ typedef struct Tnodo {
 
 int random(int max, int min);
 void newNave(Tnave* nave);
+void addNave(Tnodo* por, int dim, Tnave nave);
 
 int main() {
     
@@ -112,3 +113,23 @@ void newNave(Tnave* nave){
     cin >> ins;
     strcpy(nave->nomeNave, ins);
 }
+
+void addNave(Tnodo* por[], int dim, Tnave nave){
+    int x = random(dim, 0);
+    if(por[x] == NULL){
+      Tnodo* q = new Tnodo();
+      q->nave = nave;
+      q->next = por[x];
+      q->prev = NULL;
+      if(por[x] != NULL){
+        por[x]->prev = q;
+      }
+    }
+    Tnodo* p = por[x];
+    while(p->next != NULL){
+        p = p->next;
+    }
+    Tnodo* t = new Tnodo(NULL, p, nave);
+    p->next = t;
+}
+
