@@ -1,3 +1,4 @@
+// Online C++ compiler to run C++ program online
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
@@ -99,8 +100,15 @@ void newNave(Tnave* nave){
         }
     }
     //annoVaro
-    
+    do{
+        cout << "Anno";
+        cin >> nave->annoVaro;
+    }while(nave->annoVaro < 1990 || nave->annoVaro > 2019);
     //stazza
-    
+    nave->stazza = random(6000000, 2500000)/100;
     //nome nave
+    char* ins;
+    cout << "Nome: ";
+    cin >> ins;
+    strcpy(nave->nomeNave, ins);
 }
