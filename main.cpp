@@ -37,9 +37,25 @@ typedef struct Tnave{
 typedef struct Tnodo {
     Tnave nave;
     Tnodo *next, *prev;
-    Tnodo (Tnodo *n, Tnodo *p, Tnave _nave) { /* da implementare */ }
-    Tnodo () { /* da implementare */ }
-    void stampa() { /* da implementare */ }
+    Tnodo (Tnodo *n, Tnodo *p, Tnave _nave) {
+        nave = _nave;
+        next = n;
+        prev = p;
+    }
+    Tnodo () {
+        nave = Tnave();
+        next = NULL;
+        prev = NULL;
+    }
+    void stampa() const{
+        //controllo nel main che non sia vuota
+        Tnodo* s = next;
+        while(s!=null){
+            s.stampa();
+            s->next;
+        }
+        cout << endl;
+    }
 } Tnodo; // LISTA LIFO doppiamente concatenata
 
 int main() {
