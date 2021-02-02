@@ -10,7 +10,7 @@ typedef struct Tnave{
     float stazza;
     Tbattello tipoBattello;
     Tnave () {
-        strcpy(&nomeNave, "");
+        strcpy(nomeNave, "");
         annoVaro = 0;
         stazza = 0.0;
         tipoBattello = CARGO;
@@ -50,9 +50,9 @@ typedef struct Tnodo {
     void stampa() const{
         //controllo nel main che non sia vuota
         Tnodo* s = next;
-        while(s!=null){
-            s.stampa();
-            s->next;
+        while(s != NULL){
+            s->stampa();
+            s = s->next;
         }
         cout << endl;
     }
