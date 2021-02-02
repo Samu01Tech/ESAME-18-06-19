@@ -49,34 +49,35 @@ typedef struct Tnodo {
         prev = NULL;
     }
     void stampa() const{
-        //controllo nel main che non sia vuota
-        Tnodo* s = next;
-        while(s!=NULL){
-            s->stampa();
-            s = s->next;
-        }
-        cout << endl;
+        nave.stampa();
     }
 } Tnodo; // LISTA LIFO doppiamente concatenata
 
 int random(int max, int min);
 void newNave(Tnave* nave);
-void addNave(Tnodo* por, int dim, Tnave nave);
+void addNave(Tnodo* por[], int dim, Tnave nave);
+Tnodo* insertFirstConc(Tnodo* s, Tnave d);
+Tnodo* insertLastConc(Tnodo* s, Tnave d);
+void stampaPorti(Tnodo* por[], int dim);
 
 int main() {
     
     cout << "OK" << endl;
-    /*
+    
     Tnodo* porti[DIM];
     Tnave nave;
     for (int i=0; i<DIM; i++) { porti[i] = NULL; }
     for (int i=0; i<5; i++) {
      newNave(&nave);
+     nave.stampa();
      addNave(porti, DIM, nave);
     }
+    
     stampaPorti(porti, DIM);
+    /*
     cout << “\nnavi” << rimuoviESalvaNavi (porti, DIM, GUERRA);
-*/
+    */
+   system("PAUSE");
     return 0;
 }
 
@@ -102,34 +103,57 @@ void newNave(Tnave* nave){
     }
     //annoVaro
     do{
-        cout << "Anno";
+        cout << "Anno: ";
         cin >> nave->annoVaro;
     }while(nave->annoVaro < 1990 || nave->annoVaro > 2019);
     //stazza
     nave->stazza = random(6000000, 2500000)/100;
     //nome nave
-    char* ins;
+    char ins[20];
     cout << "Nome: ";
     cin >> ins;
     strcpy(nave->nomeNave, ins);
+    cout << "==========" << endl;
 }
 
 void addNave(Tnodo* por[], int dim, Tnave nave){
     int x = random(dim, 0);
-    if(por[x] == NULL){
-      Tnodo* q = new Tnodo();
-      q->nave = nave;
-      q->next = por[x];
-      q->prev = NULL;
-      if(por[x] != NULL){
-        por[x]->prev = q;
-      }
-    }
-    Tnodo* p = por[x];
-    while(p->next != NULL){
-        p = p->next;
-    }
-    Tnodo* t = new Tnodo(NULL, p, nave);
-    p->next = t;
+    por[x] = insertLastConc(por[x], nave);
 }
 
+Tnodo* insertLastConc(Tnodo* s, Tnave d){
+  if(s == NULL){
+    return insertFirstConc(s, d);
+  }
+  Tnodo* p = s;
+  while(p->next != NULL){
+    p = p->next;
+  }
+  Tnodo* t = new Tnodo(NULL, p, d);
+  p->next = t;
+  return s;
+}
+
+Tnodo* insertFirstConc(Tnodo* s, Tnave d){
+  Tnodo* q = new Tnodo();
+  q->nave = d;
+  q->next = s;
+  q->prev = NULL;
+  if(s != NULL){
+    s->prev = q;
+  }
+  return q;
+}
+
+void stampaPorti(Tnodo* por[], int dim){
+	Tnodo* tmp;
+	int i;
+	for(i=0 ; i<dim ; i++){
+		tmp = por[i];
+		while(tmp){
+			tmp->stampa();
+			printf("\n");
+			tmp = tmp->next;
+		}
+	}
+}
