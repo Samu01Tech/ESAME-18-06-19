@@ -50,7 +50,7 @@ typedef struct Tnodo {
     void stampa() const{
         //controllo nel main che non sia vuota
         Tnodo* s = next;
-        while(s != NULL){
+        while(s!=NULL){
             s->stampa();
             s = s->next;
         }
@@ -58,6 +58,49 @@ typedef struct Tnodo {
     }
 } Tnodo; // LISTA LIFO doppiamente concatenata
 
+int random(int max, int min);
+void newNave(Tnave* nave);
+
 int main() {
+    
+    cout << "OK" << endl;
+    /*
+    Tnodo* porti[DIM];
+    Tnave nave;
+    for (int i=0; i<DIM; i++) { porti[i] = NULL; }
+    for (int i=0; i<5; i++) {
+     newNave(&nave);
+     addNave(porti, DIM, nave);
+    }
+    stampaPorti(porti, DIM);
+    cout << “\nnavi” << rimuoviESalvaNavi (porti, DIM, GUERRA);
+*/
     return 0;
+}
+
+int random(int max, int min){
+    return rand() % (max - min + 1) + min;
+}
+
+void newNave(Tnave* nave){
+    //battello
+    switch(random(2, 0)){
+        case 0: {
+            nave->tipoBattello = CARGO;
+            break;
+        }
+        case 1: {
+            nave->tipoBattello = PASSEGGERI;
+            break;
+        }
+        case 2: {
+            nave->tipoBattello = GUERRA;
+            break;
+        }
+    }
+    //annoVaro
+    
+    //stazza
+    
+    //nome nave
 }
